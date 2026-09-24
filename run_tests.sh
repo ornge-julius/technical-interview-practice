@@ -32,6 +32,21 @@
 #   sets PRACTICE_ANSWER to that stem, then runs the Jest command from typescript/.
 #   jest.config.js uses moduleNameMapper to redirect the stub import to the answer file.
 #
+# ── Ruby problems ──────────────────────────────────────────────────────────────
+# Usage:
+#   ./run_tests.sh -f <path-to-answer.rb> -c <bundle-exec-rspec-command...>
+#
+# Examples:
+#   ./run_tests.sh \
+#     -f ruby/practice_problem_answers/cw_answer_03_permission_manager.rb \
+#     -c bundle exec rspec spec/problem_03_permission_manager_spec.rb
+#
+# How it works (Ruby):
+#   Extracts the stem from the answer filename (e.g. cw_answer_03_permission_manager),
+#   sets PRACTICE_ANSWER to that stem, then runs the rspec command from ruby/.
+#   spec_helper.rb overrides require_relative to redirect the stub require to
+#   the answer file.
+#
 # ── React problems ────────────────────────────────────────────────────────────
 # Usage:
 #   ./run_tests.sh -f <path-to-answer-dir> -c <npm-test-command...>
@@ -113,6 +128,17 @@ if [[ "$IS_DIR" == false && "$ANSWER_ABS" == *.ts && "$ANSWER_ABS" != *.tsx ]]; 
     echo "Command: ${CMD[*]}"
     echo ""
     cd "$REPO_ROOT/typescript"
+    PRACTICE_ANSWER="$ANSWER_STEM" "${CMD[@]}"
+    exit $?
+fi
+
+# ── Ruby mode: .rb answer files ───────────────────────────────────────────────
+if [[ "$IS_DIR" == false && "$ANSWER_ABS" == *.rb ]]; then
+    ANSWER_STEM="$(basename "$ANSWER_ABS" .rb)"
+    echo "Answer : $ANSWER → PRACTICE_ANSWER=$ANSWER_STEM"
+    echo "Command: ${CMD[*]}"
+    echo ""
+    cd "$REPO_ROOT/ruby"
     PRACTICE_ANSWER="$ANSWER_STEM" "${CMD[@]}"
     exit $?
 fi

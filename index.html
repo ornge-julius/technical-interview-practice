@@ -211,6 +211,7 @@
     .badge-python      { background: #e8f0fe; color: #1e40af; }
     .badge-react       { background: #e0f7fa; color: #006064; }
     .badge-typescript  { background: #dbeafe; color: #1e3a8a; }
+    .badge-ruby        { background: #fbe4e1; color: #9b1c0f; }
 
     /* Industry — add a new rule here when adding a new industry value */
     .badge-general      { background: #f1f5f9; color: #475569; }
@@ -703,6 +704,281 @@ const PROBLEMS = [
     language: "python",
     industry: "fintech",
     tags: ["retry-logic", "exponential-backoff", "state-machine", "subscription-billing", "dunning"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_01_geofence_alert_engine.rb",
+    test: "ruby/spec/problem_01_geofence_alert_engine_spec.rb",
+    title: "Geofence Alert Engine",
+    description: "Build a GPS-based zone monitor that fires configurable alert rules when tracked assets cross geofence boundaries.",
+    language: "ruby",
+    industry: "iot",
+    tags: ["event-driven", "geospatial", "alert-system", "data-model"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_02_api_rate_limiter.rb",
+    test: "ruby/spec/problem_02_api_rate_limiter_spec.rb",
+    title: "Tiered API Rate Limiter",
+    description: "Implement a sliding-window rate limiter with per-minute and per-day caps across multiple subscription tiers.",
+    language: "ruby",
+    industry: "general",
+    tags: ["rate-limiting", "sliding-window", "tiered-plans", "time-series", "api-platform"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_03_permission_manager.rb",
+    test: "ruby/spec/problem_03_permission_manager_spec.rb",
+    title: "Permission Manager (RBAC)",
+    description: "Build a role-based access control engine supporting role inheritance and wildcard permission matching.",
+    language: "ruby",
+    industry: "general",
+    tags: ["rbac", "permissions", "role-hierarchy", "wildcard-matching", "saas"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_04_biomarker_alert.rb",
+    test: "ruby/spec/problem_04_biomarker_alert_spec.rb",
+    title: "Biomarker Alert Monitor",
+    description: "Process patient readings to track consecutive out-of-range days and generate prioritized coach outreach lists.",
+    language: "ruby",
+    industry: "health-tech",
+    tags: ["time-series", "consecutive-tracking", "clinical-monitoring", "alert-system"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_05_medication_titration.rb",
+    test: "ruby/spec/problem_05_medication_titration_spec.rb",
+    title: "Medication Titration Tracker",
+    description: "Track dosage adjustment events over time, handling out-of-order arrivals and querying active medication history.",
+    language: "ruby",
+    industry: "health-tech",
+    tags: ["event-sourcing", "out-of-order-events", "medication", "clinical"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_06_lab_cadence.rb",
+    test: "ruby/spec/problem_06_lab_cadence_spec.rb",
+    title: "Lab Cadence Compliance Monitor",
+    description: "Track required lab submission deadlines per patient and surface overdue labs for health coach follow-up.",
+    language: "ruby",
+    industry: "health-tech",
+    tags: ["deadline-tracking", "compliance", "scheduling", "clinical"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_07_care_team_assignments.rb",
+    test: "ruby/spec/problem_07_care_team_assignments_spec.rb",
+    title: "Care Team Assignment Manager",
+    description: "Assign patients to care team members by role with capacity enforcement and a full reassignment audit trail queryable by timestamp.",
+    language: "ruby",
+    industry: "health-tech",
+    tags: ["relational-data", "capacity-constraints", "audit-trail", "temporal-queries"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_08_enrollment_pipeline.rb",
+    test: "ruby/spec/problem_08_enrollment_pipeline_spec.rb",
+    title: "Patient Enrollment Pipeline",
+    description: "Model a clinical enrollment state machine with duration metrics, conversion rates between stages, and SLA monitoring for patients overdue in a state.",
+    language: "ruby",
+    industry: "health-tech",
+    tags: ["state-machine", "metrics", "conversion-rate", "sla-monitoring", "clinical"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_09_incident_aggregator.rb",
+    test: "ruby/spec/problem_09_incident_aggregator_spec.rb",
+    title: "Multi-Source Incident Aggregator",
+    description: "Ingest reports from multiple data sources, manually group them into unified incidents, and auto-deduplicate new arrivals using a sliding time window.",
+    language: "ruby",
+    industry: "public-safety",
+    tags: ["event-deduplication", "time-window", "alert-system", "event-driven"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_10_dispatch_manager.rb",
+    test: "ruby/spec/problem_10_dispatch_manager_spec.rb",
+    title: "Responder Dispatch Manager",
+    description: "Route incoming incident alerts to field responders based on type subscriptions and capacity limits, with auto-assignment selecting the least-loaded eligible unit.",
+    language: "ruby",
+    industry: "public-safety",
+    tags: ["dispatch", "capacity-constraints", "priority-queue", "auto-assignment"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_11_coverage_tracker.rb",
+    test: "ruby/spec/problem_11_coverage_tracker_spec.rb",
+    title: "Sensor Coverage Tracker",
+    description: "Monitor radio-receiver station health via heartbeats, track outage history with duration metrics, and compute per-region coverage status.",
+    language: "ruby",
+    industry: "public-safety",
+    tags: ["heartbeat-monitoring", "outage-tracking", "time-series", "coverage-analysis"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_12_contract_alert_scheduler.rb",
+    test: "ruby/spec/problem_12_contract_alert_scheduler_spec.rb",
+    title: "Contract Expiration Alert Scheduler",
+    description: "Schedule and track expiration alerts for contracts — register global alert configs, compute per-contract alert schedules, query due alerts, and track sent state.",
+    language: "ruby",
+    industry: "legal-tech",
+    tags: ["scheduling", "date-arithmetic", "clm", "notifications"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_13_contract_lifecycle.rb",
+    test: "ruby/spec/problem_13_contract_lifecycle_spec.rb",
+    title: "Contract Lifecycle State Machine",
+    description: "Manage contract state transitions through a defined lifecycle (draft → executed → expired), enforcing valid transitions, audit-logging every change, and surfacing overdue contracts.",
+    language: "ruby",
+    industry: "legal-tech",
+    tags: ["state-machine", "audit-trail", "clm", "lifecycle"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_14_contract_amendment.rb",
+    test: "ruby/spec/problem_14_contract_amendment_spec.rb",
+    title: "Contract Amendment Manager",
+    description: "Track amendments to signed contracts and resolve the effective field values as of any date by applying base fields and chronological overrides.",
+    language: "ruby",
+    industry: "legal-tech",
+    tags: ["clm", "versioning", "date-arithmetic", "event-sourcing"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_15_tic_tac_toe_engine.rb",
+    test: "ruby/spec/problem_15_tic_tac_toe_engine_spec.rb",
+    title: "Tic-Tac-Toe Engine",
+    description: "Analyze game boards for winners, optimize move tracking with O(1) incremental counters, then generalize to arbitrary board sizes, win lengths, and player counts.",
+    language: "ruby",
+    industry: "general",
+    tags: ["game-logic", "incremental-state", "optimization", "generalization"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_16_premium_rating_engine.rb",
+    test: "ruby/spec/problem_16_premium_rating_engine_spec.rb",
+    title: "Policy Premium Rating Engine",
+    description: "Build a management liability premium calculator that applies coverage-type formulas, risk modifiers (industry, tenure, loss history), and produces portfolio analytics.",
+    language: "ruby",
+    industry: "insurance-tech",
+    tags: ["rating-engine", "risk-modifiers", "state-machine", "aggregation", "fintech"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_17_claims_pipeline.rb",
+    test: "ruby/spec/problem_17_claims_pipeline_spec.rb",
+    title: "Claims Processing Pipeline",
+    description: "Build a multi-stage claims lifecycle manager covering filing, investigation, settlement and denial — with reserve adequacy tracking and loss-ratio analytics.",
+    language: "ruby",
+    industry: "insurance-tech",
+    tags: ["state-machine", "event-sourcing", "aggregation", "deadline-tracking"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_18_card_risk_engine.rb",
+    test: "ruby/spec/problem_18_card_risk_engine_spec.rb",
+    title: "Card Transaction Risk Engine",
+    description: "Build a card-transaction risk engine that evaluates static fraud rules, layers in sliding-window velocity checks, and auto-blocks cards after repeated declines.",
+    language: "ruby",
+    industry: "fintech",
+    tags: ["fraud-detection", "risk-scoring", "rule-engine", "velocity-checks", "sliding-window"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_19_payment_ledger.rb",
+    test: "ruby/spec/problem_19_payment_ledger_spec.rb",
+    title: "Payment Ledger & Reconciliation",
+    description: "Build an idempotent internal ledger service that records account-to-account transfers, supports reversals, and reconciles applied transfers against an external bank statement feed.",
+    language: "ruby",
+    industry: "fintech",
+    tags: ["ledger", "idempotency", "reconciliation", "wallet", "financial-transactions"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_20_dunning_scheduler.rb",
+    test: "ruby/spec/problem_20_dunning_scheduler_spec.rb",
+    title: "Subscription Dunning & Retry Scheduler",
+    description: "Build a subscription billing dunning manager that tracks failed charge attempts, schedules retries with exponential backoff, and auto-cancels subscriptions once retries are exhausted.",
+    language: "ruby",
+    industry: "fintech",
+    tags: ["retry-logic", "exponential-backoff", "state-machine", "subscription-billing", "dunning"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_21_build_job_scheduler.rb",
+    test: "ruby/spec/problem_21_build_job_scheduler_spec.rb",
+    title: "Build Job Scheduler",
+    description: "Build a CI/build-system job scheduler that tracks job status, enforces inter-job dependencies, and selects the next runnable job by priority.",
+    language: "ruby",
+    industry: "dev-tools",
+    tags: ["dependency-graph", "priority-queue", "state-machine"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_22_dispatch_triage_queue.rb",
+    test: "ruby/spec/problem_22_dispatch_triage_queue_spec.rb",
+    title: "Emergency Dispatch Triage Queue",
+    description: "Build an emergency-call triage queue that selects the next call to dispatch by severity with SLA-driven priority escalation, and tracks SLA-breach statistics.",
+    language: "ruby",
+    industry: "public-safety",
+    tags: ["priority-queue", "deadline-tracking", "sla-tracking"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_23_course_enrollment_engine.rb",
+    test: "ruby/spec/problem_23_course_enrollment_engine_spec.rb",
+    title: "Course Enrollment Engine",
+    description: "Build a university course-enrollment engine with fixed seat capacity, a FIFO waitlist with auto-promotion, and prerequisite-course enforcement.",
+    language: "ruby",
+    industry: "ed-tech",
+    tags: ["queue-management", "capacity-tracking", "event-driven"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_24_feature_flag_rollout_engine.rb",
+    test: "ruby/spec/problem_24_feature_flag_rollout_engine_spec.rb",
+    title: "Feature Flag Rollout Engine",
+    description: "Build a feature-flag evaluation engine with allow-lists and deterministic percentage rollout, a staged lifecycle state machine, and a kill switch with an audit log.",
+    language: "ruby",
+    industry: "dev-tools",
+    tags: ["state-machine", "rollout-strategy", "rule-evaluation"],
+    parts: 3,
+    level: "senior"
+  },
+  {
+    path: "ruby/practice_problems/problem_25_fraud_velocity_checker.rb",
+    test: "ruby/spec/problem_25_fraud_velocity_checker_spec.rb",
+    title: "Fraud Velocity Checker",
+    description: "Build a real-time fraud detection module that computes trailing-window transaction velocity per account, applies risk-flagging rules, and produces a cross-account risk report.",
+    language: "ruby",
+    industry: "fintech",
+    tags: ["sliding-window", "aggregation", "risk-scoring"],
     parts: 3,
     level: "senior"
   }
