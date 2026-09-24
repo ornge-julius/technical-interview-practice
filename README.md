@@ -31,7 +31,14 @@ react/
   package.json                # Vite + Playwright deps
   playwright.config.js        # Playwright config (auto-starts Vite)
   vite.config.js
-run_tests.sh                  # Unified test runner for Python and React (see below)
+ruby/
+  practice_problems/          # Ruby class/module stubs
+  practice_problem_answers/   # Your implementations go here
+  spec/                       # RSpec suites (one per problem)
+  spec/spec_helper.rb         # answer-redirect require_relative override
+  Gemfile
+  .rspec
+run_tests.sh                  # Unified test runner for Python, React, and Ruby (see below)
 CLAUDE.md                     # Guidelines for the AI agent
 ```
 
@@ -55,6 +62,13 @@ python3.11 -m venv .venv
 cd react
 npm install
 npx playwright install chromium   # download the test browser (~95 MB)
+```
+
+### Ruby (one-time setup)
+
+```bash
+cd ruby
+bundle install
 ```
 
 ---
@@ -172,6 +186,46 @@ is set, Playwright always spawns a fresh dev server to ensure it uses the right 
 #### 5. No cleanup needed
 
 `react/src/App.jsx` is never modified, so there's nothing to restore.
+
+---
+
+### Ruby problems
+
+#### 2. Copy the stub to your answers directory
+
+```bash
+cp ruby/practice_problems/problem_03_permission_manager.rb \
+   ruby/practice_problem_answers/my_answer_03_permission_manager.rb
+```
+
+The prefix (`my_answer_`, `cw_answer_`, etc.) can be anything — the filename
+**must** keep the `NN_<name>` segment so the runner can map it to the right spec file.
+
+#### 3. Implement it
+
+Fill in the `raise NotImplementedError` stubs. Keep the method signatures identical
+to the stub.
+
+#### 4. Run tests against your answer
+
+```bash
+# Full spec file
+./run_tests.sh \
+  -f ruby/practice_problem_answers/my_answer_03_permission_manager.rb \
+  -c bundle exec rspec spec/problem_03_permission_manager_spec.rb
+
+# Single example, by line number
+./run_tests.sh \
+  -f ruby/practice_problem_answers/my_answer_03_permission_manager.rb \
+  -c bundle exec rspec spec/problem_03_permission_manager_spec.rb:42
+
+# Stop on first failure
+./run_tests.sh \
+  -f ruby/practice_problem_answers/my_answer_03_permission_manager.rb \
+  -c bundle exec rspec spec/problem_03_permission_manager_spec.rb --fail-fast
+```
+
+`PRACTICE_ANSWER` is set automatically — you never need to edit the spec files.
 
 ## Adding new problems with an AI agent
 ⚠️ WARNING - PLEASE READ: If contributing, please do not add any problems verbatim from actual technical interviews. We don't want to get each other in trouble or cause issues for people actively interviewing. The `CLAUDE.md` file has instructions to scrub actual company names from problems, but please double check the code for that before submitting a PR.
