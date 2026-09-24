@@ -58,8 +58,9 @@ Part 3 — Assignment history
 # mgr.get_assignment_at("patient_1", "coach", 6000.0)   # -> "coach_b"
 """
 
+from enum import member
 from typing import Optional
-
+import time
 
 class CapacityError(Exception):
     """Raised when assigning a patient to a member who is at their patient capacity."""
@@ -79,13 +80,60 @@ class CareTeamManager:
     """
 
     def __init__(self) -> None:
-        raise NotImplementedError
+        self.members = {
+            '1': {
+                'role': 'PCP',
+                'max_patients': 1,
+                'patients': ['ABC']
+            },
+            '2': {
+                'role': 'OBGYN',
+                'max_patients': 2,
+                'patients': ['ABC', 'XYZ']
+            },
+            '3': {
+                'role': 'OBGYN',
+                'max_patients': 5,
+                'patients': []
+            }
+        }
+        self.patients = {
+            'ABC': {
+                'assignments': {
+                    'OBGYN': [{
+                        'member_id' : '2',
+                        'assigned_at': time.time()
+                    },
+                    {
+                        'member_id': '3',
+                        'assigned_at': time.time()
+                        'unassigned_at': time.time()
+                    }],
+                    'PCP': [{
+                        'member_id': '1',
+                        'assigned_at': time.time()
+                    }]
+                }
+            },
+
+            'XYZ': {
+                'assignments': {
+                    'OBGYN': [{
+                        'member_id': '2',
+                        'assigned_at': time.time()
+                    }]
+                }
+            }
+        }
+
 
     # ── Part 1: Basic assignment and lookup ───────────────────────────────────
 
     def add_member(self, member_id: str, role: str, max_patients: int) -> None:
         """Register a care team member with the given role and patient capacity."""
-        raise NotImplementedError
+        #self.members.append({id: member_id, role: role, max_patients: max_patients, patients: []})
+        self.members[member_id] = {'role': role, 'max_patients': max_patients, 'patients': []}
+
 
     def assign(self, patient_id: str, member_id: str, assigned_at: float) -> None:
         """
@@ -102,21 +150,47 @@ class CareTeamManager:
         (Reassigning a patient who is already on this member does not count as
         adding a new patient — it is a no-op for capacity purposes.)
         """
-        raise NotImplementedError
+        member = self.members[member_id]
+        patient = self.patients[patient_id]
+        #set memebr ids
+        member_ids = list(self.members.keys())
+        members_patient_ids = []
+        # set patient ids
+        for patient_id in member['patients']:
+            members_patient_ids.append(patient['id'])
+
+
+        if patient_id in members_patient_ids:
+            return
+        elif member_id not in member_ids:
+            raise ValueError
+        elif (member['max_patients'] <= len(member['patients'])):
+            raise CapacityError
+        elif patient['assignments'][member['role']]:
+            member['patients'].append(patient)
+            patient['assignments'][member['role']][0]['unassigned_at'] = time.time()
+            patient['assignments'][member['role']].insert(0, {'member_id': member_id, 'assigned_at': time.time()})
+        else:
+            patient['assignments'][member['role']] = [{'member_id': member_id, 'assigned_at': time.time()}]
+            member['patients'].append(patient)
+            # patient['assignments'][member['role']].insert(0, {'member_id': member_id, 'assigned_at': time.time()})
 
     def get_assignment(self, patient_id: str, role: str) -> Optional[str]:
         """
         Return the member_id currently assigned to this patient for the given
         role, or None if no member of that role is currently assigned.
         """
-        raise NotImplementedError
+
+        patient = self.patients[patient_id]
+        return patient['assignments'][role][0]['id']
+
 
     def get_patients(self, member_id: str) -> list[str]:
         """
         Return a sorted list of patient_ids currently assigned to this member.
         Raises ValueError if member_id has not been registered.
         """
-        raise NotImplementedError
+        self.members[member_id]['patients'].keys()
 
     # ── Part 2: Capacity enforcement ──────────────────────────────────────────
 
@@ -125,7 +199,18 @@ class CareTeamManager:
         Return a sorted list of member_ids with the given role that still have
         open capacity (current patient count < max_patients).
         """
-        raise NotImplementedError
+        with_cap = []
+        for mem_id in self.members.keys():
+            member = self.members[mem_id]
+            if len(member['patients']) < member['max_patients'] and member['role'] == role:
+                mem = member
+                mem['id'] = mem_id
+                with_cap.append(mem)
+         #mem: {id: asd, role: asda, max_patients: 123, patients; []}
+         #with_cap = [{mem}, {mem}, {mem}]
+        sorted_mems = sorted(with_cap, key=lambda member: member['max_patients'] - len(member['patients']))
+        sorted_ids = list(map(lambda x: x['id'], sorted_mems))
+
 
     # ── Part 3: Assignment history ────────────────────────────────────────────
 
@@ -141,7 +226,17 @@ class CareTeamManager:
           past entries.
         - Returns [] if the patient has never been assigned a member of this role.
         """
-        raise NotImplementedError
+        role_history = []
+        patient = self.patients[patient_id]
+        if not patient['assignments'][role]:
+            return role_history
+        else:
+            role_history = sorted(patient['assignments'][role], key=lambda role: role['assigned_at'])
+            tuple_list = []
+            for rec in role_history:
+                tuple_list.append((rec['member_id'], rec['assigned_at'], rec['unassigned_at']))
+            return tuple_list
+
 
     def get_assignment_at(
         self, patient_id: str, role: str, timestamp: float
